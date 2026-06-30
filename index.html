@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+
+  <!-- 关键：保证微信内置浏览器、苹果、安卓、华为都按设备宽度渲染 -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" />
+
+  <!-- 防止 iPhone 自动识别数字、日期、电话导致样式变化 -->
+  <meta name="format-detection" content="telephone=no,email=no,address=no" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+
+  <title>国（境）外学历学位认证书</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    html,
+    body {
+      margin: 0;
+      padding: 0;
+      width: 100%;
+      min-height: 100%;
+      background: #f1f2f5;
+      font-family:
+        -apple-system,
+        BlinkMacSystemFont,
+        "PingFang SC",
+        "HarmonyOS Sans SC",
+        "MiSans",
+        "Helvetica Neue",
+        Arial,
+        "Microsoft YaHei",
+        sans-serif;
+      color: #222;
+      overflow-x: hidden;
+      -webkit-text-size-adjust: 100%;
+      text-size-adjust: 100%;
+    }
+
+    body {
+      font-size: 16px;
+    }
+
+    /*
+      设计基准宽度：828px
+      页面在小屏手机上整体按比例缩放；
+      在大屏设备上最大宽度限制为 828px，避免被拉得过宽。
+    */
+    .page {
+      width: 100%;
+      max-width: 828px;
+      min-height: 100vh;
+      margin: 0 auto;
+      background: #f1f2f5;
+    }
+
+    .content {
+      width: 100%;
+      background: #fff;
+      box-shadow: 0 calc(2 / 828 * 100vw) calc(6 / 828 * 100vw) rgba(0, 0, 0, 0.22);
+      overflow: hidden;
+    }
+
+    .header {
+      width: 100%;
+      height: calc(135 / 828 * 100vw);
+      max-height: 135px;
+      min-height: 62px;
+      background: #2d5fa7;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+    }
+
+    .header img {
+      width: calc(444 / 828 * 100vw);
+      max-width: 444px;
+      min-width: 214px;
+      height: auto;
+      display: block;
+    }
+
+    .title {
+      width: 100%;
+      height: calc(95 / 828 * 100vw);
+      max-height: 95px;
+      min-height: 46px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: calc(34 / 828 * 100vw);
+      max-font-size: 34px;
+      line-height: 1;
+      font-weight: 400;
+      color: #111;
+      letter-spacing: calc(8 / 828 * 100vw);
+      border-bottom: 1px solid #e1e1e1;
+      background: #fff;
+      padding-left: calc(8 / 828 * 100vw);
+      white-space: nowrap;
+    }
+
+    .info-list {
+      width: 100%;
+      background: #fff;
+      padding-left: calc(30 / 828 * 100vw);
+      max-padding-left: 30px;
+    }
+
+    .info-row {
+      width: 100%;
+      height: calc(130 / 828 * 100vw);
+      max-height: 130px;
+      min-height: 63px;
+      border-bottom: 1px solid #dedede;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      padding-top: calc(22 / 828 * 100vw);
+    }
+
+    .info-row:last-child {
+      border-bottom: none;
+    }
+
+    .label-img {
+      display: block;
+      height: auto;
+      object-fit: contain;
+      object-position: left center;
+      margin: 0 0 calc(18 / 828 * 100vw) 0;
+      flex-shrink: 0;
+    }
+
+    .icon-cert-name {
+      width: calc(137 / 828 * 100vw);
+      max-width: 137px;
+    }
+
+    .icon-cert-no {
+      width: calc(144 / 828 * 100vw);
+      max-width: 144px;
+    }
+
+    .icon-holder {
+      width: calc(114 / 828 * 100vw);
+      max-width: 114px;
+    }
+
+    .icon-holder-type {
+      width: calc(174 / 828 * 100vw);
+      max-width: 174px;
+    }
+
+    .icon-holder-code {
+      width: calc(174 / 828 * 100vw);
+      max-width: 174px;
+    }
+
+    .icon-start-date {
+      width: calc(170 / 828 * 100vw);
+      max-width: 170px;
+    }
+
+    .icon-end-date {
+      width: calc(170 / 828 * 100vw);
+      max-width: 170px;
+    }
+
+    .icon-issue-department {
+      width: calc(146 / 828 * 100vw);
+      max-width: 146px;
+    }
+
+    .icon-issue-date {
+      width: calc(143 / 828 * 100vw);
+      max-width: 143px;
+    }
+
+    .icon-cert-status {
+      width: calc(142 / 828 * 100vw);
+      max-width: 142px;
+    }
+
+    .value {
+      font-size: calc(28 / 828 * 100vw);
+      line-height: calc(34 / 828 * 100vw);
+      color: #8f9399;
+      font-weight: 400;
+      letter-spacing: 0;
+      white-space: nowrap;
+    }
+
+    /*
+      大屏限制：
+      当设备宽度超过 828px 时，所有元素保持截图原始比例，
+      不继续放大。
+    */
+    @media screen and (min-width: 828px) {
+      .content {
+        box-shadow: 0 2px 6px rgba(0, 0, 0, 0.22);
+      }
+
+      .header {
+        height: 135px;
+      }
+
+      .header img {
+        width: 444px;
+      }
+
+      .title {
+        height: 95px;
+        font-size: 34px;
+        letter-spacing: 8px;
+        padding-left: 8px;
+      }
+
+      .info-list {
+        padding-left: 30px;
+      }
+
+      .info-row {
+        height: 130px;
+        padding-top: 22px;
+      }
+
+      .label-img {
+        margin-bottom: 18px;
+      }
+
+      .value {
+        font-size: 28px;
+        line-height: 34px;
+      }
+    }
+
+    /*
+      小屏修正：
+      部分 360px 左右安卓机、华为机，如果标题略挤，
+      降低字间距，避免换行。
+    */
+    @media screen and (max-width: 390px) {
+      .title {
+        font-size: 16px;
+        letter-spacing: 3px;
+      }
+    }
+
+    @media screen and (max-width: 360px) {
+      .title {
+        font-size: 15px;
+        letter-spacing: 2.5px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="page">
+    <main class="content">
+      <section class="header">
+        <img src="./assets/cscse_header.png" alt="教育部留学服务中心" />
+      </section>
+
+      <section class="title">
+        国（境）外学历学位认证书
+      </section>
+
+      <section class="info-list">
+        <div class="info-row">
+          <img class="label-img icon-cert-name" src="./assets/icon_cert_name.png" alt="证照名称" />
+          <div class="value">国外学历学位认证书</div>
+        </div>
+
+        <div class="info-row">
+          <img class="label-img icon-cert-no" src="./assets/icon_cert_no.png" alt="证照编号" />
+          <div class="value">120240336169</div>
+        </div>
+
+        <div class="info-row">
+          <img class="label-img icon-holder" src="./assets/icon_holder.png" alt="持证者" />
+          <div class="value">陈睿东</div>
+        </div>
+
+        <div class="info-row">
+          <img class="label-img icon-holder-type" src="./assets/icon_holder_type.png" alt="持证者类型" />
+          <div class="value">身份证</div>
+        </div>
+
+        <div class="info-row">
+          <img class="label-img icon-holder-code" src="./assets/icon_holder_code.png" alt="持证者代码" />
+          <div class="value">440602198311291516</div>
+        </div>
+
+        <div class="info-row">
+          <img class="label-img icon-start-date" src="./assets/icon_start_date.png" alt="起始有效期" />
+          <div class="value">长期</div>
+        </div>
+
+        <div class="info-row">
+          <img class="label-img icon-end-date" src="./assets/icon_end_date.png" alt="截至有效期" />
+          <div class="value">长期</div>
+        </div>
+
+        <div class="info-row">
+          <img class="label-img icon-issue-department" src="./assets/icon_issue_department.png" alt="颁发部门" />
+          <div class="value">教育部留学服务中心</div>
+        </div>
+
+        <div class="info-row">
+          <img class="label-img icon-issue-date" src="./assets/icon_issue_date.png" alt="颁发日期" />
+          <div class="value">2024-11-11</div>
+        </div>
+
+        <div class="info-row">
+          <img class="label-img icon-cert-status" src="./assets/icon_cert_status.png" alt="证照状态" />
+          <div class="value">有效</div>
+        </div>
+      </section>
+    </main>
+  </div>
+</body>
+</html>
